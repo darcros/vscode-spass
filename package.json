@@ -13,7 +13,7 @@
     "languages": [{
       "id": "spass",
       "aliases": ["SPASS", "spass"],
-      "extensions": [".spass"],
+      "extensions": [".dfg", ".frm", ".cnf", ".dnf", ".prf", ".spass"],
       "configuration": "./language-configuration.json"
     }],
     "grammars": [{
