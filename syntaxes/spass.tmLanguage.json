@@ -17,15 +17,9 @@
 			}]
 		},
 		"strings": {
-			"name": "string.quoted.double.spass",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.spass",
-					"match": "\\\\."
-				}
-			]
+			"name": "string.other.spass",
+			"begin": "{\\*",
+			"end": "\\*}"
 		}
 	},
 	"scopeName": "source.spass"
