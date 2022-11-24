@@ -1,0 +1,25 @@
+{
+  "name": "vscode-spass",
+  "displayName": "vscode-SPASS",
+  "description": "SPASS syntax support for VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "spass",
+      "aliases": ["SPASS", "spass"],
+      "extensions": [".spass"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "spass",
+      "scopeName": "source.spass",
+      "path": "./syntaxes/spass.tmLanguage.json"
+    }]
+  }
+}
