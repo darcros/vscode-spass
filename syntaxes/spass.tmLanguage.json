@@ -3,7 +3,7 @@
 	"name": "SPASS",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#operators"
 		},
 		{
 			"include": "#strings"
@@ -13,10 +13,10 @@
 		}
 	],
 	"repository": {
-		"keywords": {
+		"operators": {
 			"patterns": [{
-				"name": "keyword.control.spass",
-				"match": "\\b(if|while|for|return)\\b"
+				"name": "keyword.operator.spass",
+				"match": "\\b(not|and|or|implies|equiv|forall|exists)\\b"
 			}]
 		},
 		"strings": {
