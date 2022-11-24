@@ -7,6 +7,9 @@
 		},
 		{
 			"include": "#strings"
+		},
+		{
+			"include": "#comments"
 		}
 	],
 	"repository": {
@@ -20,6 +23,11 @@
 			"name": "string.other.spass",
 			"begin": "{\\*",
 			"end": "\\*}"
+		},
+		"comments": {
+			"name": "comment.line.percentage",
+			"begin": "%",
+			"end": "$"
 		}
 	},
 	"scopeName": "source.spass"
