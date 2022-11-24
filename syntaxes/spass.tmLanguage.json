@@ -14,16 +14,12 @@
 			"match": "\\b(begin_problem|end_problem)\\b"
 		},
 		"lists": {
-			"patterns": [{
-				"name": "keyword",
-				"match": "\\b(list_of_descriptions|list_of_symbols|list_of_declarations|list_of_formulae|list_of_clauses|list_of_settings|end_of_list)\\b"
-			}]
+			"name": "keyword",
+			"match": "\\b(list_of_descriptions|list_of_symbols|list_of_declarations|list_of_formulae|list_of_clauses|list_of_settings|end_of_list)\\b"
 		},
 		"operators": {
-			"patterns": [{
-				"name": "keyword.operator.spass",
-				"match": "\\b(not|and|or|implies|equiv|forall|exists)\\b"
-			}]
+			"name": "keyword.operator.spass",
+			"match": "\\b(not|and|or|implies|equiv|forall|exists)\\b"
 		},
 		"strings": {
 			"name": "string.other.spass",
