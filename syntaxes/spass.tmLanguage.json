@@ -1,36 +1,175 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "SPASS",
-	"patterns": [
-		{ "include": "#problem" },
-		{ "include": "#lists" },
-		{ "include": "#operators" },
-		{ "include": "#strings" },
-		{ "include": "#comments" }
-	],
-	"repository": {
-		"problem": {
-			"name": "keyword",
-			"match": "\\b(begin_problem|end_problem)\\b"
-		},
-		"lists": {
-			"name": "keyword",
-			"match": "\\b(list_of_descriptions|list_of_symbols|list_of_declarations|list_of_formulae|list_of_clauses|list_of_settings|end_of_list)\\b"
-		},
-		"operators": {
-			"name": "keyword.operator.spass",
-			"match": "\\b(not|and|or|implies|equiv|forall|exists)\\b"
-		},
-		"strings": {
-			"name": "string.other.spass",
-			"begin": "{\\*",
-			"end": "\\*}"
-		},
-		"comments": {
-			"name": "comment.line.percentage",
-			"begin": "%",
-			"end": "$"
-		}
-	},
-	"scopeName": "source.spass"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SPASS",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#problem" },
+    { "include": "#operators" }
+  ],
+  "repository": {
+    "problem": {
+      "begin": "(begin_problem)\\((.+)\\)\\.",
+      "end": "(end_problem)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.problem.spass" },
+        "2": { "name": "entity.name.problem.spass" }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.problem.end.spass" }
+      },
+      "patterns": [
+        { "include": "#comments" },
+
+        { "include": "#description" },
+        { "include": "#logicalPart" },
+        { "include": "#settings" }
+      ]
+    },
+
+    "description": {
+      "patterns": [{ "include": "#list_of_descriptions" }]
+    },
+
+    "list_of_descriptions": {
+      "begin": "(list_of_descriptions)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.descriptions.spass" }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }, { "include": "#strings" }]
+    },
+
+    "logicalPart": {
+      "patterns": [
+        { "include": "#list_of_symbols" },
+        { "include": "#list_of_declarations" },
+        { "include": "#list_of_formulae" },
+        { "include": "#list_of_clauses" },
+        { "include": "#list_of_proof" }
+      ]
+    },
+
+    "list_of_symbols": {
+      "begin": "(list_of_symbols)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.symbols.spass" }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }]
+    },
+
+    "list_of_declarations": {
+      "begin": "(list_of_declarations)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.declarations.spass" }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }]
+    },
+
+    "origin_type": {
+      "match": "(axioms|conjectures)",
+      "name": "entity.name.type.origin.spass"
+    },
+
+    "clause_type": {
+      "match": "(cnf|dnf)",
+      "name": "entity.name.type.clause.spass"
+    },
+
+    "list_of_formulae": {
+      "begin": "(list_of_formulae)\\((.*)\\)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.formulae.spass" },
+        "2": {
+          "patterns": [{ "include": "#origin_type" }]
+        }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }]
+    },
+
+    "list_of_clauses": {
+      "comment": "I have implemented this just because I have read it on the SPASS syntax PDF, however I have never used it so it may not be correct",
+      "begin": "(list_of_clauses)\\((.*)\\s*,\\s*(.*)\\)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.clauses.spass" },
+        "2": { "patterns": [{ "include": "#origin_type" }] },
+        "3": { "patterns": [{ "include": "#clause_type" }] }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }]
+    },
+
+    "proof_type": {
+      "match": "(identifier|user_proof_type)",
+      "name": "entity.name.type.proof.spass"
+    },
+    "list_of_proof": {
+      "comment": "I have implemented this just because I have read it on the SPASS syntax PDF, however I have never used it so it may not be correct",
+      "begin": "(list_of_proof)\\((identifier|user_proof_type)\\)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.clauses.spass" },
+        "2": { "patterns": [{ "include": "#proof_type" }] }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }]
+    },
+
+    "settings": {
+      "patterns": [{ "include": "#list_of_settings" }]
+    },
+
+    "setting_label": {
+      "match": "(KIV|LEM|OTTER|PROTEIN|SATURATE|3TAP|SETHEO|SPASS)",
+      "name": "entity.name.type.settings.spass"
+    },
+    "list_of_settings": {
+      "comment": "I have implemented this just because I have read it on the SPASS syntax PDF, however I have never used it so it may not be correct",
+      "begin": "(list_of_settings)\\((.+)\\)\\.",
+      "end": "(end_of_list)\\.",
+      "beginCaptures": {
+        "1": { "name": "keyword.list.clauses.spass" },
+        "2": { "patterns": [{ "include": "#setting_label" }] }
+      },
+      "endCaptures": {
+        "1": { "name": "keyword.list.end.spass" }
+      },
+      "patterns": [{ "include": "#comments" }, { "include": "#strings" }]
+    },
+
+    "operators": {
+      "name": "keyword.operator.spass",
+      "match": "\\b(not|and|or|implies|equiv|forall|exists)\\b"
+    },
+    "strings": {
+      "contentName": "string.other.spass",
+      "begin": "{\\*",
+      "end": "\\*}"
+    },
+    "comments": {
+      "name": "comment.line.percentage",
+      "begin": "%",
+      "end": "$"
+    }
+  },
+  "scopeName": "source.spass"
 }
