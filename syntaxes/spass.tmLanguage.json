@@ -39,7 +39,21 @@
       "endCaptures": {
         "1": { "name": "keyword.list.end.spass" }
       },
-      "patterns": [{ "include": "#comments" }, { "include": "#strings" }]
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#descriptionsWithText" }
+      ]
+    },
+    "descriptionsWithText": {
+      "begin": "(name|author|version|logic|status|description|date)\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.list.descriptions.type.spass"
+        }
+      },
+      "patterns": [{ "include": "#strings" }]
     },
 
     "logicalPart": {
