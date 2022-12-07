@@ -15,6 +15,6 @@ I have used [this](https://webspass.spass-prover.org/help/spass-input-syntax15.p
 
 None, for now...
 
-## Release Notes
+## Releases
 
-No releases so far.
+Look [here](https://github.com/darcros/vscode-spass/releases) for releases.
