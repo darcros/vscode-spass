@@ -1,4 +1,4 @@
-# vscode-spass README
+# vscode-spass
 
 A very simple vscode extension to add syntax highliting for the SPASS theorem prover.
 
